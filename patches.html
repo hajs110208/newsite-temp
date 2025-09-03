@@ -1,43 +1,75 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Minecraft Shaders Repo - Patches</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-  <style>
-    body { font-family: 'Inter', sans-serif; margin:0; background:#fafafa; color:#222; }
-    header { background:#222; color:#fff; padding:1rem; }
-    nav a { color:#fff; margin:0 1rem; text-decoration:none; font-weight:600; }
-    nav a:hover { text-decoration:underline; }
-    .container { max-width:900px; margin:2rem auto; padding:1rem; }
-    h1 { font-size:1.8rem; margin-bottom:1rem; }
-    .download-btn { display:inline-block; padding:0.6rem 1.2rem; background:#0066cc; color:#fff; border-radius:8px; text-decoration:none; margin-top:0.5rem; font-weight:600; }
-    .download-btn:hover { background:#004c99; }
-    footer { text-align:center; padding:1rem; background:#222; color:#fff; margin-top:2rem; }
-  </style>
+  <link rel="stylesheet" href="styles.css">
 </head>
-<body>
-  <header>
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="patches.html">Patches</a>
-      <a href="shaders.html">Shaders</a>
-      <a href="links.html">Links</a>
-      <a href="contact.html">Contact</a>
+<body class="bg-gray-50 text-gray-900">
+  <header class="bg-green-700 text-white shadow">
+    <nav class="max-w-5xl mx-auto flex justify-between items-center p-4">
+      <h1 class="text-xl font-bold">Minecraft Shaders Repo</h1>
+      <ul class="flex gap-4">
+        <li><a href="index.html" class="hover:underline">Home</a></li>
+        <li><a href="patches.html" class="hover:underline font-semibold">Patches</a></li>
+        <li><a href="shaders.html" class="hover:underline">Shaders</a></li>
+        <li><a href="links.html" class="hover:underline">Links</a></li>
+        <li><a href="contact.html" class="hover:underline">Contact</a></li>
+      </ul>
     </nav>
   </header>
 
-  <div class="container">
-    <h1>Patched Versions</h1>
-    <p>Below are the patched APKs fetched from the same API as the original repo.</p>
+  <main class="max-w-5xl mx-auto p-6">
+    <h2 class="text-2xl font-bold mb-4">Patched Minecraft Versions</h2>
+    <div id="patches-container" class="patch-list"></div>
+  </main>
 
-    <!-- Example: Replace with the actual API script from hajs110208.github.io -->
-    <script src="https://hajs110208.github.io/mcpatched/api.js"></script>
-  </div>
-
-  <footer>
-    &copy; 2025 Minecraft Shaders Repo
+  <footer class="text-center text-sm text-gray-600 py-6 border-t">
+    &copy; 2025 Minecraft Shaders Repo. All rights reserved.
   </footer>
+
+  <!-- Inline GitHub API Script -->
+  <script>
+    async function fetchReleases() {
+      const container = document.getElementById("patches-container");
+      container.innerHTML = "<p>Loading releases...</p>";
+
+      try {
+        const res = await fetch("https://api.github.com/repos/hajs110208/mcpatched/releases");
+        if (!res.ok) throw new Error("GitHub API request failed");
+        const releases = await res.json();
+
+        container.innerHTML = "";
+
+        releases.forEach(release => {
+          if (!release.assets || release.assets.length === 0) return;
+
+          const item = document.createElement("div");
+          item.className = "patch-item";
+          item.innerHTML = `
+            <h2>${release.name || release.tag_name}</h2>
+            <p>${release.body ? release.body.replace(/\\r?\\n/g, "<br>") : "No description."}</p>
+            <div class="downloads">
+              ${release.assets
+                .map(
+                  asset => `
+                    <a class="btn" href="${asset.browser_download_url}" target="_blank">
+                      ${asset.name}
+                    </a>`
+                )
+                .join("")}
+            </div>
+          `;
+          container.appendChild(item);
+        });
+      } catch (err) {
+        console.error("Error loading releases:", err);
+        container.innerHTML = "<p>⚠ Failed to load releases.</p>";
+      }
+    }
+
+    document.addEventListener("DOMContentLoaded", fetchReleases);
+  </script>
 </body>
 </html>
