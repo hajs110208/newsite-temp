@@ -6,12 +6,14 @@
   <title>Minecraft Shaders Repo - Patches</title>
   <style>
     body{font-family:"Tahoma","Verdana",sans-serif;background:#fff;color:#111;margin:0;line-height:1.6;}
-    header{background:#111;color:#fff;padding:10px 0;}
-    nav{max-width:900px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;padding:0 15px;}
-    nav h1{font-size:1.2rem;font-weight:bold;}
+    header{background:#111;color:#fff;}
+    nav{max-width:1000px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;padding:10px 15px;}
+    nav h1{font-size:1rem;margin:0;font-weight:bold;white-space:nowrap;}
     nav ul{list-style:none;display:flex;gap:20px;margin:0;padding:0;}
-    nav a{color:#fff;text-decoration:none;font-weight:bold;}
+    nav a{color:#fff;text-decoration:none;font-weight:bold;font-size:.95rem;}
     nav a:hover{text-decoration:underline;}
+    .menu-toggle{display:none;background:none;border:none;color:#fff;font-size:1.5rem;cursor:pointer;}
+    @media(max-width:720px){nav{flex-wrap:wrap;}nav ul{display:none;flex-direction:column;width:100%;background:#111;margin-top:10px;}nav ul.show{display:flex;}.menu-toggle{display:block;}}
     main{max-width:900px;margin:20px auto;padding:0 15px;}
     .patch-item{border:1px solid #ddd;border-radius:6px;padding:15px;margin-bottom:20px;}
     .patch-item h2{margin:0 0 8px 0;}
@@ -26,6 +28,7 @@
   <header>
     <nav>
       <h1>Minecraft Shaders Repo</h1>
+      <button class="menu-toggle">☰</button>
       <ul>
         <li><a href="index.html">Home</a></li>
         <li><a href="patches.html">Patches</a></li>
@@ -46,59 +49,11 @@
   </footer>
 
   <script>
-    function formatSize(bytes) {
-      if (!bytes) return "";
-      const sizes = ["B","KB","MB","GB"];
-      const i = Math.floor(Math.log(bytes)/Math.log(1024));
-      return (bytes/Math.pow(1024,i)).toFixed(1)+" "+sizes[i];
-    }
-
-    function getLabel(asset) {
-      const name = asset.name.toLowerCase();
-      const size = formatSize(asset.size);
-      if (name.includes("mbl2")) return `Download mbl2 (${size})`;
-      if (name.includes("arm32_arm64_patched.apk")) return `Download YSS Patched (${size})`;
-      if (name.endsWith(".mcpack")) return `Download Music (${size})`;
-      return `Download ${asset.name} (${size})`;
-    }
-
-    async function fetchReleases() {
-      const container = document.getElementById("patches-container");
-      container.innerHTML = "<p>Loading releases...</p>";
-      try {
-        const res = await fetch("https://api.github.com/repos/hajs110208/mcpatched/releases");
-        if (!res.ok) throw new Error("GitHub API request failed");
-        let releases = await res.json();
-
-        // Sort by publish date (latest first)
-        releases.sort((a, b) => new Date(b.published_at) - new Date(a.published_at));
-
-        container.innerHTML = "";
-        releases.forEach(release => {
-          if (!release.assets || release.assets.length === 0) return;
-
-          const firstLine = release.body ? release.body.split(/\r?\n/)[0] : "";
-          const dateHTML = firstLine ? `<p class="date">📅 ${firstLine}</p>` : "";
-
-          const item = document.createElement("div");
-          item.className = "patch-item";
-          item.innerHTML = `
-            <h2>${release.name || release.tag_name}</h2>
-            ${dateHTML}
-            <div class="downloads">
-              ${release.assets.map(asset => `
-                <a class="btn" href="${asset.browser_download_url}" target="_blank">${getLabel(asset)}</a>
-              `).join("")}
-            </div>
-          `;
-          container.appendChild(item);
-        });
-      } catch (err) {
-        console.error("Error loading releases:", err);
-        container.innerHTML = "<p>⚠ Failed to load releases.</p>";
-      }
-    }
-    document.addEventListener("DOMContentLoaded", fetchReleases);
+    function formatSize(bytes){if(!bytes)return"";const sizes=["B","KB","MB","GB"];const i=Math.floor(Math.log(bytes)/Math.log(1024));return(bytes/Math.pow(1024,i)).toFixed(1)+" "+sizes[i];}
+    function getLabel(asset){const name=asset.name.toLowerCase();const size=formatSize(asset.size);if(name.includes("mbl2"))return`Download mbl2 (${size})`;if(name.includes("arm32_arm64_patched.apk"))return`Download YSS Patched (${size})`;if(name.endsWith(".mcpack"))return`Download Music (${size})`;return`Download ${asset.name} (${size})`;}
+    async function fetchReleases(){const container=document.getElementById("patches-container");container.innerHTML="<p>Loading releases...</p>";try{const res=await fetch("https://api.github.com/repos/hajs110208/mcpatched/releases");if(!res.ok)throw new Error("GitHub API request failed");let releases=await res.json();releases.sort((a,b)=>new Date(b.published_at)-new Date(a.published_at));container.innerHTML="";releases.forEach(release=>{if(!release.assets||release.assets.length===0)return;const firstLine=release.body?release.body.split(/\r?\n/)[0]:"";const dateHTML=firstLine?`<p class="date">📅 ${firstLine}</p>`:"";const item=document.createElement("div");item.className="patch-item";item.innerHTML=`<h2>${release.name||release.tag_name}</h2>${dateHTML}<div class="downloads">${release.assets.map(asset=>`<a class="btn" href="${asset.browser_download_url}" target="_blank">${getLabel(asset)}</a>`).join("")}</div>`;container.appendChild(item);});}catch(err){console.error("Error loading releases:",err);container.innerHTML="<p>⚠ Failed to load releases.</p>";}}
+    document.addEventListener("DOMContentLoaded",fetchReleases);
+    document.querySelector(".menu-toggle").addEventListener("click",()=>document.querySelector("nav ul").classList.toggle("show"));
   </script>
 </body>
 </html>
