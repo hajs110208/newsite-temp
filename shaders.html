@@ -1,49 +1,52 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Minecraft Shaders Repo - Shaders</title>
-  <style>
-    body{font-family:"Tahoma","Verdana",sans-serif;background:#fff;color:#111;margin:0;line-height:1.6;}
-    header{background:#111;color:#fff;}
-    nav{max-width:1000px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;padding:10px 15px;}
-    nav h1{font-size:1rem;margin:0;font-weight:bold;white-space:nowrap;}
-    nav ul{list-style:none;display:flex;gap:20px;margin:0;padding:0;}
-    nav a{color:#fff;text-decoration:none;font-weight:bold;font-size:.95rem;}
-    nav a:hover{text-decoration:underline;}
-    .menu-toggle{display:none;background:none;border:none;color:#fff;font-size:1.5rem;cursor:pointer;}
-    @media(max-width:720px){nav{flex-wrap:wrap;}nav ul{display:none;flex-direction:column;width:100%;background:#111;margin-top:10px;}nav ul.show{display:flex;}.menu-toggle{display:block;}}
-    main{max-width:900px;margin:20px auto;padding:0 15px;}
-    footer{border-top:1px solid #ddd;text-align:center;font-size:.85rem;color:#555;padding:15px;margin-top:30px;}
-  </style>
-</head>
-<body>
-  <header>
-    <nav>
-      <h1>Minecraft Shaders Repo</h1>
-      <button class="menu-toggle">☰</button>
-      <ul>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="patches.html">Patches</a></li>
-        <li><a href="shaders.html">Shaders</a></li>
-        <li><a href="links.html">Links</a></li>
-        <li><a href="contact.html">Contact</a></li>
-      </ul>
-    </nav>
-  </header>
+<main>
+  <h2>Shaders Collection</h2>
+  <div id="shader-readme" class="shader-readme">Fetching readme...</div>
+</main>
 
-  <main>
-    <h2>Shaders Collection</h2>
-    <p>Here will be listed community shaders for Minecraft Bedrock.</p>
-  </main>
+<script>
+async function fetchShaderReadme() {
+  const container = document.getElementById("shader-readme");
+  try {
+    // get some things from the repo
+    const res = await fetch("https://raw.githubusercontent.com/hajs110208/Render-dragon-shader-list/main/README.md");
+    if (!res.ok) throw new Error("Failed to fetch README.md");
+    const markdown = await res.text();
 
-  <footer>
-    &copy; 2025 Minecraft Shaders Repo. All rights reserved.
-  </footer>
+    // Convert Markdown -> HTML (basic conversion, lightweight)
+    const html = markdown
+      .replace(/^### (.*$)/gim, '<h3>$1</h3>')
+      .replace(/^## (.*$)/gim, '<h2>$1</h2>')
+      .replace(/^# (.*$)/gim, '<h1>$1</h1>')
+      .replace(/\*\*(.*?)\*\*/gim, '<b>$1</b>')
+      .replace(/\*(.*?)\*/gim, '<i>$1</i>')
+      .replace(/\[(.*?)\]\((.*?)\)/gim, '<a href="$2" target="_blank">$1</a>')
+      .replace(/\n$/gim, '<br>');
 
-  <script>
-    document.querySelector(".menu-toggle").addEventListener("click",()=>document.querySelector("nav ul").classList.toggle("show"));
-  </script>
-</body>
-</html>
+    container.innerHTML = html;
+  } catch (err) {
+    console.error(err);
+    container.innerHTML = "⚠ Could not load shaders list.";
+  }
+}
+
+document.addEventListener("DOMContentLoaded", fetchShaderReadme);
+</script>
+
+<style>
+  .shader-readme {
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    background: #fafafa;
+  }
+  .shader-readme h1, .shader-readme h2, .shader-readme h3 {
+    margin-top: 1em;
+  }
+  .shader-readme a {
+    color: #0078d7;
+    text-decoration: none;
+  }
+  .shader-readme a:hover {
+    text-decoration: underline;
+  }
+</style>
