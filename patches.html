@@ -1,79 +1,292 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1250827131214443"
+     crossorigin="anonymous"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Minecraft Shaders Repo - Patches</title>
+  <title>Minecraft Patched APK</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;display=swap" rel="stylesheet">
   <style>
-    body{font-family:"Tahoma","Verdana",sans-serif;background:#fff;color:#111;margin:0;line-height:1.6;}
-    header{background:#111;color:#fff;padding:10px 0;}
-    nav{max-width:900px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;padding:0 15px;}
-    nav h1{font-size:1.2rem;font-weight:bold;}
-    nav ul{list-style:none;display:flex;gap:20px;margin:0;padding:0;}
-    nav a{color:#fff;text-decoration:none;font-weight:bold;}
-    nav a:hover{text-decoration:underline;}
-    main{max-width:900px;margin:20px auto;padding:0 15px;}
-    .patch-item{border:1px solid #ddd;border-radius:6px;padding:15px;margin-bottom:20px;}
-    .patch-item h2{margin:0 0 8px 0;}
-    .downloads{margin-top:10px;}
-    .btn{display:inline-block;padding:6px 12px;margin-right:6px;background:#0078d7;color:#fff;text-decoration:none;border-radius:4px;font-size:.9rem;}
-    .btn:hover{background:#005ea6;}
-    footer{border-top:1px solid #ddd;text-align:center;font-size:.85rem;color:#555;padding:15px;margin-top:30px;}
+    :root {
+      --bg-color: #f4f4f4;
+      --text-color: #333;
+      --card-bg: #fff;
+      --accent-color: #28a745;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      margin: 0;
+      padding: 20px;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      transition: background-color 0.4s, color 0.4s;
+      animation: fadeIn 0.8s ease-in;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+      font-size: 2em;
+      color: var(--text-color);
+      animation: fadeIn 0.6s ease-in-out;
+    }
+
+    .container {
+      max-width: 600px;
+      width: 100%;
+    }
+
+    .release {
+      margin: 15px 0;
+      padding: 15px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      background-color: var(--card-bg);
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      animation: slideIn 0.6s ease;
+    }
+
+    .release h2 {
+      margin: 0;
+      font-size: 1.5em;
+      color: var(--text-color);
+    }
+
+    .release p {
+      margin: 10px 0;
+      color: var(--text-color);
+    }
+
+    .release .download-btn {
+      display: inline-block;
+      padding: 10px 20px;
+      background-color: var(--accent-color);
+      color: #fff;
+      text-decoration: none;
+      border-radius: 8px;
+      transition: transform 0.3s ease, background-color 0.3s ease;
+      font-weight: bold;
+      font-size: 1.1em;
+      margin-top: 10px;
+      text-align: center;
+      width: 100%;
+      max-width: 420px;
+      box-sizing: border-box;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+    }
+
+    .release .download-btn:hover {
+      background-color: #218838;
+      transform: scale(1.06);
+    }
+
+    .latest-label {
+      position: absolute;
+      top: 0px;
+      right: 0px;
+      background-color: var(--accent-color);
+      color: white;
+      padding: 7px 12px;
+      border-radius: 0 0 0 8px;
+      font-weight: bold;
+      font-size: 0.9em;
+      animation: glow 3s infinite;
+    }
+
+    code,
+    p,
+    a {
+      animation: fadeIn 0.6s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes slideIn {
+      from {
+        transform: translateX(-30px);
+        opacity: 0;
+      }
+      to {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+
+    @keyframes glow {
+      0% {
+        box-shadow: 0 0 8px var(--accent-color);
+      }
+      50% {
+        box-shadow: 0 0 15px var(--accent-color);
+      }
+      100% {
+        box-shadow: 0 0 5px var(--accent-color);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .release .download-btn {
+        font-size: 0.9em;
+        padding: 8px 16px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .release .download-btn {
+        font-size: 0.8em;
+        padding: 6px 12px;
+      }
+    }
+
+    #themeToggle {
+      position: fixed;
+      top: 10px;
+      right: 10px;
+      z-index: 999;
+      padding: 8px 16px;
+      background-color: var(--accent-color);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background-color 0.3s ease;
+    }
+
+    #themeToggle:hover {
+      background-color: #218838;
+    }
+
+    .dark {
+      --bg-color: #1e1e1e;
+      --text-color: #eaeaea;
+      --card-bg: #2c2c2c;
+    }
+
+    .amoled {
+      --bg-color: #000000;
+      --text-color: #eaeaea;
+      --card-bg: #111111;
+    }
   </style>
 </head>
 <body>
-  <header>
-    <nav>
-      <h1>Minecraft Shaders Repo</h1>
-      <ul>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="patches.html">Patches</a></li>
-        <li><a href="shaders.html">Shaders</a></li>
-        <li><a href="links.html">Links</a></li>
-        <li><a href="contact.html">Contact</a></li>
-      </ul>
-    </nav>
-  </header>
-
-  <main>
-    <h2>Patched Minecraft Versions</h2>
-    <div id="patches-container" class="patch-list"></div>
-  </main>
-
-  <footer>
-    &copy; 2025 Minecraft Shaders Repo. All rights reserved.
-  </footer>
-
+  <button id="themeToggle">Theme: Light</button>
+  <h1>Minecraft Patched APK Repo (fan-made) href="https://api.github.com/repos/hajs110208/mcpatched/releases">
+  <div class="container">
+    <div id="releases"></div>
+  </div>
   <script>
-    async function fetchReleases() {
-      const container = document.getElementById("patches-container");
-      container.innerHTML = "<p>Loading releases...</p>";
-      try {
-        const res = await fetch("https://api.github.com/repos/hajs110208/mcpatched/releases");
-        if (!res.ok) throw new Error("GitHub API request failed");
-        const releases = await res.json();
-        container.innerHTML = "";
-        releases.forEach(release => {
-          if (!release.assets || release.assets.length === 0) return;
-          const item = document.createElement("div");
-          item.className = "patch-item";
-          item.innerHTML = `
-            <h2>${release.name || release.tag_name}</h2>
-            <p>${release.body ? release.body.replace(/\\r?\\n/g, "<br>") : "No description."}</p>
-            <div class="downloads">
-              ${release.assets.map(asset => `
-                <a class="btn" href="${asset.browser_download_url}" target="_blank">${asset.name}</a>
-              `).join("")}
-            </div>
-          `;
-          container.appendChild(item);
-        });
-      } catch (err) {
-        console.error("Error loading releases:", err);
-        container.innerHTML = "<p>⚠ Failed to load releases.</p>";
+    const themeButton = document.getElementById('themeToggle');
+    const themes = ['light', 'dark', 'amoled'];
+    let current = localStorage.getItem('theme') || 'light';
+    applyTheme(current);
+
+    themeButton.addEventListener('click', () => {
+      const next = themes[(themes.indexOf(current) + 1) % themes.length];
+      applyTheme(next);
+    });
+
+    function applyTheme(mode) {
+      document.body.classList.remove('light', 'dark', 'amoled');
+      if (mode !== 'light') document.body.classList.add(mode);
+      current = mode;
+      localStorage.setItem('theme', mode);
+      themeButton.textContent = `Theme: ${mode.charAt(0).toUpperCase() + mode.slice(1)}`;
+    }
+
+    function redirectToStore() {
+      const androidLink = "market://details?id=io.bambosan.mbloader";
+      const webLink = "https://play.google.com/store/apps/details?id=io.bambosan.mbloader";
+      const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+      if (/android/i.test(userAgent)) {
+        window.location.href = androidLink;
+      } else {
+        window.location.href = webLink;
       }
     }
-    document.addEventListener("DOMContentLoaded", fetchReleases);
+
+    function formatReleaseDate(bodyText) {
+      const match = bodyText.match(/^\d{8}/);
+      if (match) {
+        const [y, m, d] = [match[0].slice(0, 4), match[0].slice(4, 6), match[0].slice(6, 8)];
+        return new Date(`${y}-${m}-${d}`).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+      }
+      return 'Unspecified';
+    }
+
+    function getDownloadButtonText(name, size) {
+      if (name.includes("mbl2")) return `Download MBL2 Patched (${size} MB)`;
+      if (name.includes("mbl")) return `Download MBL Patched (${size} MB)`;
+      if (name.includes("draco")) return `Download Draco Patched (${size} MB)`;
+      if (name.includes("arm32_arm64_patched.apk")) return `Download YSS Official Patched (${size} MB)`;
+      if (name.includes("music")) return `Download Music (${size} MB)`;
+      return `Download (${size} MB)`;
+    }
+
+    async function fetchReleases() {
+      const apiUrl = 'https://api.github.com/repos/hajs110208/mcpatched/releases';
+      try {
+        const response = await fetch(apiUrl);
+        const data = await response.json();
+        const container = document.getElementById('releases');
+        data.forEach((release, index) => {
+          let totalDownloads = 0;
+          const div = document.createElement('div');
+          div.className = 'release';
+          const date = formatReleaseDate(release.body);
+          div.innerHTML = `
+            <h2><a href="${release.html_url}" target="_blank" style="text-decoration:none;color:inherit">${release.name}</a></h2>
+            <p><strong>Creation Date:</strong> ${date}</p>
+            <p><strong>Total Downloads:</strong> <span id="downloads-${release.id}">0</span></p>
+          `;
+          if (index === 0) {
+            const tag = document.createElement('span');
+            tag.className = 'latest-label';
+            tag.textContent = 'Latest';
+            div.appendChild(tag);
+          }
+          release.assets.forEach(asset => {
+            if (asset.name.startsWith('1')) {
+              const size = (asset.size / 1024 / 1024).toFixed(0);
+              totalDownloads += asset.download_count;
+              const a = document.createElement('a');
+              a.href = asset.browser_download_url;
+              a.target = "_blank";
+              a.className = "download-btn";
+              a.textContent = getDownloadButtonText(asset.name, size);
+              div.appendChild(a);
+            
+            }
+          });
+          div.querySelector(`#downloads-${release.id}`).textContent = totalDownloads;
+          container.appendChild(div);
+        });
+      } catch (err) {
+        console.error('Failed to fetch releases:', err);
+      }
+    }
+
+    fetchReleases();
   </script>
 </body>
 </html>
