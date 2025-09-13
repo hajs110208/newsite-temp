@@ -3,7 +3,6 @@
   <div id="shader-readme" class="shader-readme">Loading shaders...</div>
 </main>
 
-<!-- Load marked.js from CDN -->
 <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 <script>
 async function fetchShaderReadme() {
@@ -16,18 +15,32 @@ async function fetchShaderReadme() {
     // Convert Markdown -> HTML
     container.innerHTML = marked.parse(markdown);
 
-    // Fix relative image and link paths
-    const repoBase = "https://raw.githubusercontent.com/hajs110208/Render-dragon-shader-list/main/";
+    // --- FIX STARTS HERE ---
+
+    // Define base URLs for resolving relative paths
+    const imageBaseUrl = "https://raw.githubusercontent.com/hajs110208/Render-dragon-shader-list/main/";
+    const linkBaseUrl = "https://github.com/hajs110208/Render-dragon-shader-list/blob/main/";
+
+    // Fix relative image paths
     container.querySelectorAll("img").forEach(img => {
-      if (!img.src.startsWith("http")) {
-        img.src = repoBase + img.getAttribute("src");
+      const originalSrc = img.getAttribute("src");
+      // Check if the src is not an absolute URL (doesn't start with http)
+      if (originalSrc && !originalSrc.startsWith("http")) {
+        // Use the URL constructor for a more reliable way to join paths
+        img.src = new URL(originalSrc, imageBaseUrl).href;
       }
     });
+
+    // Fix relative link paths
     container.querySelectorAll("a").forEach(a => {
-      if (!a.href.startsWith("http")) {
-        a.href = "https://github.com/hajs110208/Render-dragon-shader-list/blob/main/" + a.getAttribute("href");
+      const originalHref = a.getAttribute("href");
+      // Check if the href is not an absolute URL and not an anchor link
+      if (originalHref && !originalHref.startsWith("http") && !originalHref.startsWith("#")) {
+        a.href = new URL(originalHref, linkBaseUrl).href;
       }
     });
+
+    // --- FIX ENDS HERE ---
 
   } catch (err) {
     console.error(err);
