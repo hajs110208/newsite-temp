@@ -1,9 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shaders Collection</title>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <style>
+      /* Apply a cleaner font to the whole page */
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        line-height: 1.6;
+        margin: 0;
+        padding: 20px;
+        background-color: #fff;
+        color: #333;
+      }
+      main {
+        max-width: 800px;
+        margin: 0 auto;
+      }
+      .shader-readme {
+        padding: 15px 25px;
+        border: 1px solid #ddd;
+        border-radius: 6px;
+        background: #fafafa;
+        overflow-x: auto;
+      }
+      .shader-readme img {
+        max-width: 100%;
+        height: auto;
+        margin: 10px 0;
+        border-radius: 4px;
+        background-color: #eee; /* Shows a placeholder if image is broken */
+      }
+      .shader-readme a {
+        color: #0078d7;
+        text-decoration: none;
+      }
+      .shader-readme a:hover {
+        text-decoration: underline;
+      }
+      .shader-readme h1, .shader-readme h2, .shader-readme h3 {
+        border-bottom: 1px solid #eee;
+        padding-bottom: 5px;
+      }
+    </style>
+</head>
+<body>
+
 <main>
   <h2>Shaders Collection</h2>
   <div id="shader-readme" class="shader-readme">Loading shaders...</div>
 </main>
 
-<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 <script>
 async function fetchShaderReadme() {
   const container = document.getElementById("shader-readme");
@@ -12,35 +61,30 @@ async function fetchShaderReadme() {
     if (!res.ok) throw new Error("Failed to fetch README.md");
     const markdown = await res.text();
 
-    // Convert Markdown -> HTML
     container.innerHTML = marked.parse(markdown);
 
-    // --- FIX STARTS HERE ---
-
-    // Define base URLs for resolving relative paths
     const imageBaseUrl = "https://raw.githubusercontent.com/hajs110208/Render-dragon-shader-list/main/";
     const linkBaseUrl = "https://github.com/hajs110208/Render-dragon-shader-list/blob/main/";
 
-    // Fix relative image paths
     container.querySelectorAll("img").forEach(img => {
       const originalSrc = img.getAttribute("src");
-      // Check if the src is not an absolute URL (doesn't start with http)
       if (originalSrc && !originalSrc.startsWith("http")) {
-        // Use the URL constructor for a more reliable way to join paths
-        img.src = new URL(originalSrc, imageBaseUrl).href;
+        const finalUrl = new URL(originalSrc, imageBaseUrl).href;
+        
+        // --- DEBUGGING ---
+        // This will print the URL it's trying to load for each image.
+        console.log("Attempting to load image from:", finalUrl); 
+        
+        img.src = finalUrl;
       }
     });
 
-    // Fix relative link paths
     container.querySelectorAll("a").forEach(a => {
       const originalHref = a.getAttribute("href");
-      // Check if the href is not an absolute URL and not an anchor link
       if (originalHref && !originalHref.startsWith("http") && !originalHref.startsWith("#")) {
         a.href = new URL(originalHref, linkBaseUrl).href;
       }
     });
-
-    // --- FIX ENDS HERE ---
 
   } catch (err) {
     console.error(err);
@@ -51,24 +95,5 @@ async function fetchShaderReadme() {
 document.addEventListener("DOMContentLoaded", fetchShaderReadme);
 </script>
 
-<style>
-  .shader-readme {
-    padding: 15px;
-    border: 1px solid #ddd;
-    border-radius: 6px;
-    background: #fafafa;
-    overflow-x: auto;
-  }
-  .shader-readme img {
-    max-width: 100%;
-    height: auto;
-    margin: 10px 0;
-  }
-  .shader-readme a {
-    color: #0078d7;
-    text-decoration: none;
-  }
-  .shader-readme a:hover {
-    text-decoration: underline;
-  }
-</style>
+</body>
+</html>
