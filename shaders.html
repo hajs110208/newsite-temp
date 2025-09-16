@@ -1,99 +1,652 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shaders Collection</title>
-    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <title>RenderDragon Shader List</title>
     <style>
-      /* Apply a cleaner font to the whole page */
-      body {
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-        line-height: 1.6;
-        margin: 0;
-        padding: 20px;
-        background-color: #fff;
-        color: #333;
-      }
-      main {
-        max-width: 800px;
-        margin: 0 auto;
-      }
-      .shader-readme {
-        padding: 15px 25px;
-        border: 1px solid #ddd;
-        border-radius: 6px;
-        background: #fafafa;
-        overflow-x: auto;
-      }
-      .shader-readme img {
-        max-width: 100%;
-        height: auto;
-        margin: 10px 0;
-        border-radius: 4px;
-        background-color: #eee; /* Shows a placeholder if image is broken */
-      }
-      .shader-readme a {
-        color: #0078d7;
-        text-decoration: none;
-      }
-      .shader-readme a:hover {
-        text-decoration: underline;
-      }
-      .shader-readme h1, .shader-readme h2, .shader-readme h3 {
-        border-bottom: 1px solid #eee;
-        padding-bottom: 5px;
-      }
+        body { font-family: sans-serif; line-height: 1.6; }
+        h1, h2, h3 { color: #333; }
+        a { color: #007bff; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        .warning { background-color: #fff3cd; border-left: 5px solid #ffc107; padding: 10px; margin-bottom: 15px; }
+        .note { background-color: #e9ecef; border-left: 5px solid #6c757d; padding: 10px; margin-bottom: 15px; }
+        blockquote {
+            padding: 10px 20px;
+            margin: 0 0 20px;
+            font-size: 17.5px;
+            border-left: 5px solid #eee;
+        }
+        img { max-width: 100%; height: auto; }
+        hr { margin-top: 20px; margin-bottom: 20px; border: 0; border-top: 1px solid #eee; }
     </style>
 </head>
 <body>
 
-<main>
-  <h2>Shaders Collection</h2>
-  <div id="shader-readme" class="shader-readme">Loading shaders...</div>
-</main>
-
-<script>
-async function fetchShaderReadme() {
-  const container = document.getElementById("shader-readme");
-  try {
-    const res = await fetch("https://raw.githubusercontent.com/hajs110208/Render-dragon-shader-list/main/README.md");
-    if (!res.ok) throw new Error("Failed to fetch README.md");
-    const markdown = await res.text();
-
-    container.innerHTML = marked.parse(markdown);
-
-    const imageBaseUrl = "https://raw.githubusercontent.com/hajs110208/Render-dragon-shader-list/main/";
-    const linkBaseUrl = "https://github.com/hajs110208/Render-dragon-shader-list/blob/main/";
-
-    container.querySelectorAll("img").forEach(img => {
-      const originalSrc = img.getAttribute("src");
-      if (originalSrc && !originalSrc.startsWith("http")) {
-        const finalUrl = new URL(originalSrc, imageBaseUrl).href;
-        
-        // --- DEBUGGING ---
-        // This will print the URL it's trying to load for each image.
-        console.log("Attempting to load image from:", finalUrl); 
-        
-        img.src = finalUrl;
-      }
-    });
-
-    container.querySelectorAll("a").forEach(a => {
-      const originalHref = a.getAttribute("href");
-      if (originalHref && !originalHref.startsWith("http") && !originalHref.startsWith("#")) {
-        a.href = new URL(originalHref, linkBaseUrl).href;
-      }
-    });
-
-  } catch (err) {
-    console.error(err);
-    container.innerHTML = "⚠ Could not load shaders list.";
-  }
-}
-
-document.addEventListener("DOMContentLoaded", fetchShaderReadme);
-</script>
+<p><img src="/images/banner.png" alt=""></p>
+<br>
+<ul>
+<li><a href="/language/ko_kr/README.md">Korean / 한국어</a></li>
+</ul>
+<br>
+<h1>RenderDragon Shader List</h1>
+<h1>By Dominokorean</h1>
+<p>This is a GitHub repository created to prevent downloading fake shaders and to help you find reliable shader packs.</p>
+<p>If you encounter any issues with the document, please use the <a href="https://github.com/DominoKorean/Render-dragon-shader-list/issues"><strong>Issues</strong></a>.<br>
+If you want to contribute to the document or add your own shader, please use a <a href="https://github.com/DominoKorean/Render-dragon-shader-list/pulls"><strong>Pull Request</strong></a>.</p>
+<br>
+<h2>What is RenderDragon?</h2>
+<p>According to <a href="https://minecraft.wiki/RenderDragon">Minecraft Wiki</a>, it's a new rendering engine made for Minecraft Bedrock edition which replaces old OpenGL/DirectX engine.</p>
+<p>Render Dragon shaders are custom shaders created by modding Render Dragon files, enabling the application of custom shaders after official third-party shader support was discontinued with the introduction of Render Dragon.</p>
+<br>
+<blockquote>
+<p>[!WARNING]<br>
+Do not use <code>9Minecraft</code>. Fake RenderDragon shaders are mixed in, and shaders are being distributed without the creator's permission.<br>
+<strong>Most importantly, the site may pose a virus and security risk.</strong><br>
+Never use it and inform those around you about the dangers.</p>
+</blockquote>
+<br>
+<h2>Bedrock Graphics</h2>
+<p><a href="https://discord.gg/WwUEe7hYBz"><img src="/banners/comunity/Bedrock%20Graphics.png" alt=""></a></p>
+<br>
+<h2>How to Install?</h2>
+<ul>
+<li><a href="/docs/installation/README.md">Renderdragon Shader Installation</a></li>
+</ul>
+<br>
+<hr>
+<ul>
+<li><a href="/TERMS_OF_USE.md">Terms of Use</a></li>
+</ul>
+<br>
+<blockquote>
+<p>[!NOTE]<br>
+This document is RD Shader List 2.0.</p>
+<ul>
+<li><a href="/docs/about2.0.md">What are the differences between 2.0 and 1.0?</a></li>
+</ul>
+</blockquote>
+<br>
+<hr>
+<br>
+<h2>Table of contents</h2>
+<ul>
+<li><a href="#renderdragon-shader-list">RenderDragon Shader List</a>
+<ul>
+<li><a href="#what-is-renderdragon">What is RenderDragon?</a></li>
+<li><a href="#bedrock-graphics">Bedrock Graphics</a></li>
+<li><a href="#how-to-install">How to Install?</a></li>
+<li><a href="#table-of-contents">Table of contents</a></li>
+</ul>
+</li>
+<li><a href="#render-dragon-shader-mod--utilities">Render Dragon Shader Mod / Utilities</a>
+<ul>
+<li><a href="#mb-loader">MB Loader</a></li>
+<li><a href="#betterrenderdragon">BetterRenderDragon</a></li>
+<li><a href="#betterresourcepackmanager">BetterResourcePackManager</a></li>
+</ul>
+</li>
+<li><a href="#render-dragon-shaders">Render dragon shaders</a>
+<ul>
+<li><a href="#render-dragon">Render dragon</a>
+<ul>
+<li><a href="#yss-rd">YSS RD</a></li>
+<li><a href="#newb-x-legacy">Newb X Legacy</a></li>
+<li><a href="#eternity-shader">Eternity Shader</a></li>
+<li><a href="#vanilla-x-enhanced">Vanilla X Enhanced</a></li>
+<li><a href="#innovative-shader">Innovative Shader</a></li>
+<li><a href="#cool-voxel">Cool Voxel</a></li>
+<li><a href="#mlyx-弥浪隐霄-shader">MLYX 弥浪隐霄 Shader</a></li>
+<li><a href="#ranzies-vibrant-shader">Ranzie's Vibrant Shader</a></li>
+<li><a href="#azify-revive">AziFy: REVIVE</a></li>
+<li><a href="#azify-reimagined">AziFy: REIMAGINED</a></li>
+<li><a href="#azify-natural">AziFy Natural</a></li>
+<li><a href="#truly-default">Truly Default</a></li>
+<li><a href="#fhd-shader">FHD Shader</a></li>
+<li><a href="#azify-smootea">AziFy: SmooTea</a></li>
+<li><a href="#nullistic-shader">Nullistic Shader</a></li>
+</ul>
+</li>
+<li><a href="#rtx">RTX</a>
+<ul>
+<li><a href="#betterrtx">BetterRTX</a></li>
+</ul>
+</li>
+<li><a href="#vibrant-visuals">Vibrant Visuals</a>
+<ul>
+<li><a href="#lynxs-post-processing">Lynx's Post Processing</a></li>
+</ul>
+</li>
+<li><a href="#utility-shaders">Utility Shaders</a>
+<ul>
+<li><a href="#renderdragon-fullbright">RenderDragon FullBright</a></li>
+<li><a href="#renderdragonfogremover">RenderDragonFogRemover</a></li>
+<li><a href="#rd-cubemap-fix">RD Cubemap Fix</a></li>
+<li><a href="#grays-night-vision">Gray's Night Vision</a></li>
+<li><a href="#night-emissive-vision">Night Emissive Vision</a></li>
+<li><a href="#hd-font-fix">HD Font Fix</a></li>
+<li><a href="#glow-em-all">Glow Em All</a></li>
+</ul>
+</li>
+<li><a href="#dev">Dev</a></li>
+</ul>
+</li>
+</ul>
+<hr>
+<br>
+<br>
+<h1>Render Dragon Shader Mod / Utilities</h1>
+<br>
+<h2>MB Loader</h2>
+<p><img src="/tags/etc/Recommended.svg" alt="">
+<img src="/tags/platform/Android.svg" alt="">
+<img src="/tags/pre_supported_packaging/MaterialBinLoader.svg" alt="">
+<img src="/tags/pre_supported_packaging/APK.svg" alt=""></p>
+<p><a href="https://play.google.com/store/apps/details?id=io.bambosan.mbloader">https://play.google.com/store/apps/details?id=io.bambosan.mbloader</a></p>
+<blockquote>
+<p>Allows RenderDragon shaders to be used as a resource pack.<br>
+For more details, see <a href="https://faizul726.github.io/blog/what-is-mb-loader/">this post</a>.</p>
+</blockquote>
+<br>
+<br>
+<h2>BetterRenderDragon</h2>
+<p><img src="/tags/etc/Recommended.svg" alt="">
+<img src="/tags/platform/Windows.svg" alt="">
+<img src="/tags/platform/Android.svg" alt="">
+<img src="/tags/pre_supported_packaging/MaterialBinLoader.svg" alt="">
+<img src="/tags/pre_supported_packaging/EXE.svg" alt="">
+<img src="/tags/pre_supported_packaging/DLL.svg" alt="">
+<img src="/tags/pre_supported_packaging/SO.svg" alt=""></p>
+<p><a href="https://github.com/QYCottage/BetterRenderDragon">https://github.com/QYCottage/BetterRenderDragon</a></p>
+<blockquote>
+<p>Provides the following features as a third-party mod.</p>
+<ul>
+<li>Enable Vibrant Visuals</li>
+<li>Disable Raytracing for better performance</li>
+<li>Loads RenderDragon shaders from the resource pack</li>
+<li>Configurable ImGui</li>
+</ul>
+</blockquote>
+<br>
+<br>
+<blockquote>
+<h3>Fzul's BRD Updater</h3>
+<p><img src="/tags/pre_supported_packaging/BAT.svg" alt=""></p>
+<p><a href="https://github.com/faizul726/brd-updater-script">https://github.com/faizul726/brd-updater-script</a></p>
+<blockquote>
+<p>This is a script that automatically updates BetterRenderDragon.</p>
+<ul>
+<li>Automatically updates BRD.</li>
+<li>Prevents the BRD executable <code>mcbe_injector.exe</code> from being automatically removed by Windows Defender.</li>
+</ul>
+</blockquote>
+</blockquote>
+<br>
+<br>
+<h2>BetterResourcePackManager</h2>
+<p><img src="/tags/platform/Windows.svg" alt=""> <img src="/tags/platform/Android.svg" alt="">
+<img src="/language/ko_kr/tags/pre_supported_packaging/MaterialBinLoader.svg" alt="">
+<img src="/tags/pre_supported_packaging/DLL.svg" alt="">
+<img src="/tags/pre_supported_packaging/SO.svg" alt=""></p>
+<p><a href="https://discord.gg/8nGcV8QkKZ">https://discord.gg/8nGcV8QkKZ</a></p>
+<blockquote>
+<p>This is a third-party mod that provides the following features:</p>
+<ul>
+<li>Load RenderDragon shaders and OreUI from resource packs</li>
+<li>Switch resource packs in-game</li>
+<li>Load custom geometry skins via skin packs</li>
+</ul>
+<blockquote>
+<p>[!NOTE]<br>
+This mod is still in the testing phase and may be unstable.</p>
+</blockquote>
+</blockquote>
+<br>
+<br>
+<hr>
+<br>
+<br>
+<br>
+<br>
+<h1>Render dragon shaders</h1>
+<br>
+<br>
+<h2>Render dragon</h2>
+<br>
+<h3>YSS RD</h3>
+<p><a href="https://discord.gg/years-static-shader-group-738688684223889409"><img src="/banners/shader/YSS%20RD.png" alt=""></a>
+<img src="https://img.shields.io/badge/Creator-ENDERMANYK-3D444D?style=flat-square&labelColor=white" alt="Creator">
+<img src="/tags/tag/link.svg" alt="link">
+<a href="https://discord.gg/years-static-shader-group-738688684223889409"><img src="/tags/link/Discord.svg" alt=""></a>
+<img src="/tags/tag/Platform.svg" alt="Platform">
+<img src="/tags/platform/Android.svg" alt="">
+<img src="/tags/platform/iOS.svg" alt="">
+<img src="/tags/platform/Windows.svg" alt="">
+<img src="/tags/platform/Switch.svg" alt="">
+<img src="/tags/platform/Xbox.svg" alt="">
+<img src="/tags/tag/Pre-Packaging.svg" alt="Pre-Packaging">
+<img src="/tags/pre_supported_packaging/MaterialBinLoader.svg" alt="">
+<img src="/tags/tag/Style.svg" alt="Style">
+<img src="/tags/style/Vanilla.svg" alt=""></p>
+<p><a href="screenshots/YSS%20RD/README.md"><img src="/tags/etc/Screen_Shots.svg" alt=""></a></p>
+<br>
+<br>
+<h3>Newb X Legacy</h3>
+<p><a href="https://devendrn.github.io/newb-shader/"><img src="/banners/shader/Newb%20X.png" alt=""></a>
+<img src="https://img.shields.io/badge/Creator-devendrn-3D444D?style=flat-square&labelColor=white" alt="Creator">
+<img src="/tags/tag/link.svg" alt="link">
+<a href="https://github.com/devendrn/newb-x-mcbe"><img src="/tags/link/GitHub.svg" alt=""></a>
+<a href="https://www.curseforge.com/minecraft-bedrock/texture-packs/newb-shader"><img src="/tags/link/CurseForge.svg" alt=""></a>
+<a href="https://mcpedl.com/newb-shader"><img src="/tags/link/MCPEDL.svg" alt=""></a>
+<a href="https://discord.gg/newb-community-844591537430069279"><img src="/tags/link/Discord.svg" alt=""></a>
+<img src="/tags/tag/Platform.svg" alt="Platform">
+<img src="/tags/platform/Android.svg" alt="">
+<img src="/tags/platform/iOS.svg" alt="">
+<img src="/tags/platform/Windows.svg" alt="">
+<img src="/tags/tag/Pre-Packaging.svg" alt="Pre-Packaging">
+<img src="/tags/pre_supported_packaging/MaterialBinLoader.svg" alt="">
+<img src="/tags/pre_supported_packaging/IPA.svg" alt="">
+<img src="/tags/tag/Style.svg" alt="Style">
+<img src="/tags/style/Vanilla.svg" alt=""></p>
+<blockquote>
+<p>[!NOTE]<br>
+<strong>Development Discontinued</strong></p>
+</blockquote>
+<blockquote>
+<p>This shader is no longer being updated.<br>
+If the version and date listed below become significantly outdated compared to the current version, the shader may no longer function properly.</p>
+<ul>
+<li>Last Version: <code>v16</code></li>
+<li>Last Update Date: <code>June 14, 2025</code></li>
+<li>Bedrock Version at Last Update: <code>1.21.81</code></li>
+</ul>
+</blockquote>
+<br>
+<br>
+<h3>Eternity Shader</h3>
+<p><a href="https://mcpedl.com/user/WindsScion"><img src="/banners/shader/Eternity%20Shader.png" alt=""></a>
+<img src="https://img.shields.io/badge/Creator-Wind's_Scion-3D444D?style=flat-square&labelColor=white" alt="Creator">
+<img src="/tags/tag/link.svg" alt="link">
+<a href="https://mcpedl.com/user/WindsScion"><img src="/tags/link/MCPEDL.svg" alt=""></a>
+<a href="https://discord.gg/EdG4x85Sgm"><img src="/tags/link/Discord.svg" alt=""></a>
+<img src="/tags/tag/Platform.svg" alt="Platform">
+<img src="/tags/platform/Android.svg" alt="">
+<img src="/tags/platform/iOS.svg" alt="">
+<img src="/tags/platform/Windows.svg" alt="">
+<img src="/tags/tag/Pre-Packaging.svg" alt="Pre-Packaging">
+<img src="/tags/pre_supported_packaging/MaterialBinLoader.svg" alt="">
+<img src="/tags/tag/Style.svg" alt="Style">
+<img src="/tags/style/Fantasy.svg" alt=""></p>
+<br>
+<br>
+<h3>Vanilla X Enhanced</h3>
+<p><a href="https://mcpedl.com/user/WindsScion"><img src="/banners/shader/Vanilla%20X%20Enhanced.png" alt=""></a>
+<img src="https://img.shields.io/badge/Creator-Wind's_Scion-3D444D?style=flat-square&labelColor=white" alt="Creator">
+<img src="/tags/tag/link.svg" alt="link">
+<a href="https://mcpedl.com/user/WindsScion"><img src="/tags/link/MCPEDL.svg" alt=""></a>
+<a href="https://discord.gg/EdG4x85Sgm"><img src="/tags/link/Discord.svg" alt=""></a>
+<img src="/tags/tag/Platform.svg" alt="Platform">
+<img src="/tags/platform/Android.svg" alt="">
+<img src="/tags/platform/iOS.svg" alt="">
+<img src="/tags/platform/Windows.svg" alt="">
+<img src="/tags/tag/Pre-Packaging.svg" alt="Pre-Packaging">
+<img src="/tags/pre_supported_packaging/MaterialBinLoader.svg" alt="">
+<img src="/tags/tag/Style.svg" alt="Style">
+<img src="/tags/style/Vanilla.svg" alt=""></p>
+<br>
+<br>
+<h3>Innovative Shader</h3>
+<p><a href="https://discord.gg/EdG4x85Sgm"><img src="/banners/shader/Innovative%20Shader.png" alt=""></a>
+<img src="https://img.shields.io/badge/Creator-Wind's_Scion-3D444D?style=flat-square&labelColor=white" alt="Creator">
+<img src="/tags/tag/link.svg" alt="link">
+<a href="https://discord.gg/EdG4x85Sgm"><img src="/tags/link/Discord.svg" alt=""></a>
+<img src="/tags/tag/Platform.svg" alt="Platform">
+<img src="/tags/platform/Android.svg" alt="">
+<img src="/tags/platform/iOS.svg" alt="">
+<img src="/tags/platform/Windows.svg" alt="">
+<img src="/tags/tag/Pre-Packaging.svg" alt="Pre-Packaging">
+<img src="/tags/pre_supported_packaging/MaterialBinLoader.svg" alt="">
+<img src="/tags/tag/Style.svg" alt="Style">
+<img src="/tags/style/Realistic.svg" alt=""></p>
+<p><a href="/screenshots/Innovative%20Shader/README.md"><img src="/tags/etc/Screen_Shots.svg" alt=""></a></p>
+<br>
+<br>
+<h3>Cool Voxel</h3>
+<p><a href="https://mcpedl.com/user/WindsScion"><img src="/banners/shader/Cool%20Voxel.png" alt=""></a>
+<img src="https://img.shields.io/badge/Creator-Wind's_Scion-3D444D?style=flat-square&labelColor=white" alt="Creator">
+<img src="/tags/tag/link.svg" alt="link">
+<a href="https://mcpedl.com/user/WindsScion"><img src="/tags/link/MCPEDL.svg" alt=""></a>
+<a href="https://discord.gg/EdG4x85Sgm"><img src="/tags/link/Discord.svg" alt=""></a>
+<img src="/tags/tag/Platform.svg" alt="Platform">
+<img src="/tags/platform/Android.svg" alt="">
+<img src="/tags/platform/iOS.svg" alt="">
+<img src="/tags/platform/Windows.svg" alt="">
+<img src="/tags/tag/Pre-Packaging.svg" alt="Pre-Packaging">
+<img src="/tags/pre_supported_packaging/MaterialBinLoader.svg" alt="">
+<img src="/tags/tag/Style.svg" alt="Style">
+<img src="/tags/style/Vanilla.svg" alt=""></p>
+<br>
+<br>
+<h3>MLYX 弥浪隐霄 Shader</h3>
+<p><a href="https://discord.gg/years-static-shader-group-738688684223889409"><img src="/banners/shader/MLYX%20弥浪隐霄%20Shader.png" alt=""></a>
+<img src="https://img.shields.io/badge/Creator-mlyx__chuchu-3D444D?style=flat-square&labelColor=white" alt="Creator">
+<img src="/tags/tag/link.svg" alt="link">
+<a href="https://discord.gg/years-static-shader-group-7386886842238894099"><img src="https://img.shields.io/badge/Years_Static_Shader_Group-Discord-5865F2?style=flat-square&labelColor=2E39A0&logo=discord&logoColor=white" alt=""></a>
+<img src="/tags/tag/Platform.svg" alt="Platform">
+<img src="/tags/platform/Android.svg" alt="">
+<img src="/tags/platform/iOS.svg" alt="">
+<img src="/tags/platform/Windows.svg" alt="">
+<img src="/tags/tag/Pre-Packaging.svg" alt="Pre-Packaging">
+<img src="/tags/pre_supported_packaging/MaterialBinLoader.svg" alt="">
+<img src="/tags/tag/Style.svg" alt="Style">
+<img src="/tags/style/Semi_Realistic.svg" alt=""></p>
+<p><a href="/screenshots/MLYX%20弥浪隐霄%20Shader/README.md"><img src="/tags/etc/Screen_Shots.svg" alt=""></a></p>
+<br>
+<br>
+<h3>Ranzie's Vibrant Shader</h3>
+<p><a href="https://www.patreon.com/ZnarGeenGuy"><img src="/banners/shader/Ranzie's%20Vibrant%20Shader.png" alt=""></a>
+<img src="https://img.shields.io/badge/Creator-Ranzie-3D444D?style=flat-square&labelColor=white" alt="Creator">
+<img src="/tags/tag/link.svg" alt="link">
+<a href="https://www.patreon.com/ZnarGeenGuy"><img src="/tags/link/Patreon.svg" alt=""></a>
+<a href="https://youtu.be/6Kg9OlggkQU?si=qGxfXsG9Fp-oIvSo"><img src="/tags/link/YouTube.svg" alt=""></a>
+<img src="/tags/tag/Platform.svg" alt="Platform">
+<img src="/tags/platform/Android.svg" alt="">
+<img src="/tags/platform/iOS.svg" alt="">
+<img src="/tags/platform/Windows.svg" alt="">
+<img src="/tags/tag/Pre-Packaging.svg" alt="Pre-Packaging">
+<img src="/tags/pre_supported_packaging/MaterialBinLoader.svg" alt="">
+<img src="/tags/tag/Style.svg" alt="Style">
+<img src="/tags/style/Cartoon.svg" alt=""></p>
+<br>
+<br>
+<h3>AziFy: REVIVE</h3>
+<p><a href="https://mcpedl.com/user/azion-studios/"><img src="/banners/shader/AziFy%20Revive.png" alt=""></a>
+<img src="https://img.shields.io/badge/Creator-Azi_Angelo_Real-3D444D?style=flat-square&labelColor=white" alt="Creator">
+<img src="/tags/tag/link.svg" alt="link">
+<a href="https://www.curseforge.com/minecraft-bedrock/texture-packs/azify-revive-shader"><img src="/tags/link/CurseForge.svg" alt=""></a>
+<a href="https://mcpedl.com/user/azion-studios/"><img src="/tags/link/MCPEDL.svg" alt=""></a>
+<a href="https://www.youtube.com/@aziangelo"><img src="/tags/link/YouTube.svg" alt=""></a>
+<img src="/tags/tag/Platform.svg" alt="Platform">
+<img src="/tags/platform/Android.svg" alt="">
+<img src="/tags/platform/iOS.svg" alt="">
+<img src="/tags/platform/Windows.svg" alt="">
+<img src="/tags/tag/Pre-Packaging.svg" alt="Pre-Packaging">
+<img src="/tags/pre_supported_packaging/MaterialBinLoader.svg" alt="">
+<img src="/tags/tag/Style.svg" alt="Style">
+<img src="/tags/style/Vanilla.svg" alt=""></p>
+<br>
+<br>
+<h3>AziFy: REIMAGINED</h3>
+<p><a href="https://mcpedl.com/user/azion-studios/"><img src="/banners/shader/AziFy%20Reimagined.png" alt=""></a>
+<img src="https://img.shields.io/badge/Creator-Azi_Angelo_Real-3D444D?style=flat-square&labelColor=white" alt="Creator">
+<img src="/tags/tag/link.svg" alt="link">
+<a href="https://mcpedl.com/user/azion-studios/"><img src="/tags/link/MCPEDL.svg" alt=""></a>
+<a href="https://discord.gg/MZfYkY8tmD"><img src="/tags/link/Discord.svg" alt=""></a>
+<a href="https://www.youtube.com/@aziangelo"><img src="/tags/link/YouTube.svg" alt=""></a>
+<img src="/tags/tag/Platform.svg" alt="Platform">
+<img src="/tags/platform/Android.svg" alt="">
+<img src="/tags/platform/iOS.svg" alt="">
+<img src="/tags/platform/Windows.svg" alt="">
+<img src="/tags/tag/Pre-Packaging.svg" alt="Pre-Packaging">
+<img src="/tags/pre_supported_packaging/MaterialBinLoader.svg" alt="">
+<img src="/tags/tag/Style.svg" alt="Style">
+<img src="/tags/style/Vanilla.svg" alt=""></p>
+<br>
+<br>
+<h3>AziFy Natural</h3>
+<p><a href="https://mcpedl.com/user/azion-studios/"><img src="/banners/shader/AziFy%20Natural.png" alt=""></a>
+<img src="https://img.shields.io/badge/Creator-Azi_Angelo_Real-3D444D?style=flat-square&labelColor=white" alt="Creator">
+<img src="/tags/tag/link.svg" alt="link">
+<a href="https://mcpedl.com/user/azion-studios/"><img src="/tags/link/MCPEDL.svg" alt=""></a>
+<a href="https://discord.gg/MZfYkY8tmD"><img src="/tags/link/Discord.svg" alt=""></a>
+<a href="https://www.youtube.com/@aziangelo"><img src="/tags/link/YouTube.svg" alt=""></a>
+<img src="/tags/tag/Platform.svg" alt="Platform">
+<img src="/tags/platform/Android.svg" alt="">
+<img src="/tags/platform/iOS.svg" alt="">
+<img src="/tags/platform/Windows.svg" alt="">
+<img src="/tags/tag/Pre-Packaging.svg" alt="Pre-Packaging">
+<img src="/tags/pre_supported_packaging/MaterialBinLoader.svg" alt="">
+<img src="/tags/tag/Style.svg" alt="Style">
+<img src="/tags/style/Vanilla.svg" alt=""></p>
+<br>
+<br>
+<h3>Truly Default</h3>
+<p><a href="https://mcpedl.com/user/azion-studios/"><img src="/banners/shader/Truly%20Default.png" alt=""></a>
+<img src="https://img.shields.io/badge/Creator-Azi_Angelo_Real-3D444D?style=flat-square&labelColor=white" alt="Creator">
+<img src="/tags/tag/link.svg" alt="link">
+<a href="https://www.curseforge.com/minecraft-bedrock/texture-packs/azify-truly-default"><img src="/tags/link/CurseForge.svg" alt=""></a>
+<a href="https://mcpedl.com/user/azion-studios/"><img src="/tags/link/MCPEDL.svg" alt=""></a>
+<a href="https://discord.gg/MZfYkY8tmD"><img src="/tags/link/Discord.svg" alt=""></a>
+<a href="https://www.youtube.com/@aziangelo"><img src="/tags/link/YouTube.svg" alt=""></a>
+<img src="/tags/tag/Platform.svg" alt="Platform">
+<img src="/tags/platform/Android.svg" alt="">
+<img src="/tags/tag/Pre-Packaging.svg" alt="Pre-Packaging">
+<img src="/tags/pre_supported_packaging/MaterialBinLoader.svg" alt="">
+<img src="/tags/tag/Style.svg" alt="Style">
+<img src="/tags/style/Vanilla.svg" alt=""></p>
+<br>
+<br>
+<h3>FHD Shader</h3>
+<p><a href="https://youtu.be/kEzznDBdCSQ?si=MLEijYf0sJouBPO3"><img src="/banners/shader/FHD%20Shader.png" alt=""></a>
+<img src="https://img.shields.io/badge/Creator-Azi_Angelo_Real-3D444D?style=flat-square&labelColor=white" alt="Creator">
+<img src="/tags/tag/link.svg" alt="link">
+<a href="https://www.youtube.com/@aziangelo"><img src="/tags/link/YouTube.svg" alt=""></a>
+<img src="/tags/tag/Platform.svg" alt="Platform">
+<img src="/tags/platform/Android.svg" alt="">
+<img src="/tags/platform/iOS.svg" alt="">
+<img src="/tags/platform/Windows.svg" alt="">
+<img src="/tags/tag/Pre-Packaging.svg" alt="Pre-Packaging">
+<img src="/tags/pre_supported_packaging/MaterialBinLoader.svg" alt="">
+<img src="/tags/tag/Style.svg" alt="Style">
+<img src="/tags/style/Vanilla.svg" alt=""></p>
+<br>
+<br>
+<h3>AziFy: SmooTea</h3>
+<p><a href="https://www.curseforge.com/minecraft-bedrock/texture-packs/azifysmootea"><img src="/banners/shader/AziFy%20SmooTea.png" alt=""></a>
+<img src="https://img.shields.io/badge/Creator-Azi_Angelo_Real-3D444D?style=flat-square&labelColor=white" alt="Creator">
+<img src="/tags/tag/link.svg" alt="link">
+<a href="https://www.curseforge.com/minecraft-bedrock/texture-packs/azifysmootea"><img src="/tags/link/CurseForge.svg" alt=""></a>
+<a href="https://mcpedl.com/azifysmootea/"><img src="/tags/link/MCPEDL.svg" alt=""></a>
+<a href="https://discord.gg/MZfYkY8tmD"><img src="/tags/link/Discord.svg" alt=""></a>
+<img src="/tags/tag/Platform.svg" alt="Platform">
+<img src="/tags/platform/Android.svg" alt="">
+<img src="/tags/platform/iOS.svg" alt="">
+<img src="/tags/platform/Windows.svg" alt="">
+<img src="/tags/tag/Pre-Packaging.svg" alt="Pre-Packaging">
+<img src="/tags/pre_supported_packaging/MaterialBinLoader.svg" alt="">
+<img src="/tags/tag/Style.svg" alt="Style">
+<img src="/tags/style/Semi_Realistic.svg" alt=""></p>
+<br>
+<br>
+<h3>Nullistic Shader</h3>
+<p><a href="https://discord.com/invite/newb-community-844591537430069279"><img src="/banners/shader/Nullistic%20Shader.png" alt=""></a>
+<img src="https://img.shields.io/badge/Creator-Indeed-3D444D?style=flat-square&labelColor=white" alt="Creator">
+<img src="/tags/tag/link.svg" alt="link">
+<a href="https://discord.com/invite/newb-community-844591537430069279"><img src="https://img.shields.io/badge/Newb_Community-Discord-5865F2?style=flat-square&labelColor=2E39A0&logo=discord&logoColor=white" alt=""></a>
+<img src="/tags/tag/Platform.svg" alt="Platform">
+<img src="/tags/platform/Android.svg" alt="">
+<img src="/tags/tag/Pre-Packaging.svg" alt="Pre-Packaging">
+<img src="/tags/pre_supported_packaging/MaterialBinLoader.svg" alt="">
+<img src="/tags/tag/Style.svg" alt="Style">
+<img src="/tags/style/Vanilla.svg" alt=""></p>
+<p><a href="/screenshots/Nullistic%20Shader/README.md"><img src="/tags/etc/Screen_Shots.svg" alt=""></a></p>
+<br>
+<br>
+<br>
+<h2>RTX</h2>
+<br>
+<h3>BetterRTX</h3>
+<p><a href="https://github.com/BetterRTX"><img src="/banners/shader/BetterRTX.png" alt=""></a>
+<img src="https://img.shields.io/badge/Bedrock_RTX-Windows-0078D6?style=flat-square&labelColor=black&logo=nvidia" alt=""></p>
+<br>
+<ul>
+<li><a href="https://github.com/ABUCKY0/betterrtx-installer">Installer</a></li>
+</ul>
+<br>
+<br>
+<h2>Vibrant Visuals</h2>
+<br>
+<h3>Lynx's Post Processing</h3>
+<p><a href="https://www.curseforge.com/minecraft-bedrock/texture-packs/lynxs-post-processing"><img src="/banners/shader/Lynx's%20Post%20Processing.png" alt=""></a>
+<img src="https://img.shields.io/badge/Creator-Lynx-3D444D?style=flat-square&labelColor=white" alt="Creator">
+<img src="https://img.shields.io/badge/Download_Link-Android-DCDCE2?style=flat-square&labelColor=white" alt="link">
+<a href="https://www.curseforge.com/minecraft-bedrock/texture-packs/lynxs-post-processing"><img src="/tags/link/CurseForge.svg" alt=""></a>
+<img src="https://img.shields.io/badge/Download_Link-Windows-DCDCE2?style=flat-square&labelColor=white" alt="link">
+<a href="https://discord.gg/WwUEe7hYBz"><img src="https://img.shields.io/badge/Bedrock_Graphics-Discord-5865F2?style=flat-square&labelColor=2E39A0&logo=discord&logoColor=white" alt=""></a>
+<img src="/tags/tag/Platform.svg" alt="Platform">
+<img src="/tags/platform/Android.svg" alt="">
+<img src="/tags/platform/Windows.svg" alt="">
+<img src="/tags/tag/Pre-Packaging.svg" alt="Pre-Packaging">
+<img src="/tags/pre_supported_packaging/MaterialBinLoader.svg" alt="">
+<img src="/tags/tag/Style.svg" alt="Style">
+<img src="https://img.shields.io/badge/Post_Processing-black?style=flat-square" alt=""></p>
+<br>
+<br>
+<p><a href="https://www.curseforge.com/minecraft-bedrock/texture-packs/dynamic-endsky-for-vibrant-visuals"><img src="/banners/shader/Dynamic%20EndSky%20for%20Vibrant%20visuals.png" alt=""></a>
+<img src="https://img.shields.io/badge/Creator-Lynx-3D444D?style=flat-square&labelColor=white" alt="Creator">
+<img src="/tags/tag/link.svg" alt="link">
+<a href="https://www.curseforge.com/minecraft-bedrock/texture-packs/lynxs-post-processing"><img src="/tags/link/CurseForge.svg" alt=""></a>
+<img src="/tags/tag/Platform.svg" alt="Platform">
+<img src="/tags/platform/Android.svg" alt="">
+<img src="/tags/tag/Pre-Packaging.svg" alt="Pre-Packaging">
+<img src="/tags/pre_supported_packaging/MaterialBinLoader.svg" alt="">
+<img src="/tags/tag/Style.svg" alt="Style">
+<img src="/tags/style/Realistic.svg" alt=""></p>
+<br>
+<br>
+<h2>Utility Shaders</h2>
+<br>
+<h3>RenderDragon FullBright</h3>
+<p><img src="https://img.shields.io/badge/Creator-Furzide-3D444D?style=flat-square&labelColor=white" alt="Creator">
+<img src="/tags/tag/link.svg" alt="link">
+<a href="https://github.com/Furzide/RenderDragonFullBright"><img src="/tags/link/GitHub.svg" alt=""></a>
+<img src="/tags/tag/Platform.svg" alt="Platform">
+<img src="/tags/platform/Android.svg" alt="">
+<img src="/tags/platform/iOS.svg" alt="">
+<img src="/tags/platform/Windows.svg" alt="">
+<img src="/tags/tag/Pre-Packaging.svg" alt="Pre-Packaging">
+<img src="/tags/pre_supported_packaging/MaterialBinLoader.svg" alt=""></p>
+<blockquote>
+<p>The screen remains bright as if night vision is always enabled, eliminating dark areas.</p>
+</blockquote>
+<p><a href="https://github.com/Furzide/RenderDragonFullBright">https://github.com/Furzide/RenderDragonFullBright</a></p>
+<br>
+<br>
+<h3>RenderDragonFogRemover</h3>
+<p><img src="https://img.shields.io/badge/Creator-Furzide-3D444D?style=flat-square&labelColor=white" alt="Creator">
+<img src="/tags/tag/link.svg" alt="link">
+<a href="https://github.com/Furzide/RenderDragonFogRemover"><img src="/tags/link/GitHub.svg" alt=""></a>
+<img src="/tags/tag/Platform.svg" alt="Platform">
+<img src="/tags/platform/Android.svg" alt="">
+<img src="/tags/platform/iOS.svg" alt="">
+<img src="/tags/platform/Windows.svg" alt="">
+<img src="/tags/tag/Pre-Packaging.svg" alt="Pre-Packaging">
+<img src="/tags/pre_supported_packaging/MaterialBinLoader.svg" alt=""></p>
+<blockquote>
+<p>Removes fog.</p>
+</blockquote>
+<p><a href="https://github.com/Furzide/RenderDragonFogRemover">https://github.com/Furzide/RenderDragonFogRemover</a></p>
+<br>
+<br>
+<h3>RD Cubemap Fix</h3>
+<p><img src="https://img.shields.io/badge/Creator-Furzide-3D444D?style=flat-square&labelColor=white" alt="Creator">
+<img src="/tags/tag/link.svg" alt="link">
+<a href="https://github.com/Furzide/RenderDragonCubemapFix"><img src="/tags/link/GitHub.svg" alt=""></a>
+<img src="/tags/tag/Platform.svg" alt="Platform">
+<img src="/tags/platform/Android.svg" alt="">
+<img src="/tags/platform/iOS.svg" alt="">
+<img src="/tags/platform/Windows.svg" alt="">
+<img src="/tags/tag/Pre-Packaging.svg" alt="Pre-Packaging">
+<img src="/tags/pre_supported_packaging/MaterialBinLoader.svg" alt=""></p>
+<blockquote>
+<p>Fixes the incorrect cubemap positions in the original Minecraft.</p>
+</blockquote>
+<p><a href="https://github.com/Furzide/RenderDragonCubemapFix">https://github.com/Furzide/RenderDragonCubemapFix</a></p>
+<br>
+<br>
+<h3>Gray's Night Vision</h3>
+<p><img src="https://img.shields.io/badge/Creator-Wind's_Scion-3D444D?style=flat-square&labelColor=white" alt="Creator">
+<img src="/tags/tag/link.svg" alt="link">
+<a href="https://mcpedl.com/night-vision-v2-2-for-mcpe-be-v1-21-support-renderdragon/"><img src="/tags/link/MCPEDL.svg" alt=""></a>
+<a href="https://discord.gg/EdG4x85Sgm"><img src="/tags/link/Discord.svg" alt=""></a>
+<img src="/tags/tag/Platform.svg" alt="Platform">
+<img src="/tags/platform/Android.svg" alt="">
+<img src="/tags/platform/iOS.svg" alt="">
+<img src="/tags/platform/Windows.svg" alt="">
+<img src="/tags/tag/Pre-Packaging.svg" alt="Pre-Packaging">
+<img src="/tags/pre_supported_packaging/MaterialBinLoader.svg" alt=""></p>
+<blockquote>
+<p>The screen remains bright as if night vision is always enabled, eliminating dark areas.</p>
+</blockquote>
+<p><a href="https://mcpedl.com/night-vision-v2-2-for-mcpe-be-v1-21-support-renderdragon">https://mcpedl.com/night-vision-v2-2-for-mcpe-be-v1-21-support-renderdragon</a></p>
+<br>
+<br>
+<h3>Night Emissive Vision</h3>
+<p><img src="https://img.shields.io/badge/Creator-Wind's_Scion-3D444D?style=flat-square&labelColor=white" alt="Creator">
+<img src="/tags/tag/link.svg" alt="link">
+<a href="https://mcpedl.com/night-emissive-vision-for-mcpe-be-v1-21"><img src="/tags/link/MCPEDL.svg" alt=""></a>
+<a href="https://discord.gg/EdG4x85Sgm"><img src="/tags/link/Discord.svg" alt=""></a>
+<img src="/tags/tag/Platform.svg" alt="Platform">
+<img src="/tags/platform/Android.svg" alt="">
+<img src="/tags/platform/iOS.svg" alt="">
+<img src="/tags/platform/Windows.svg" alt="">
+<img src="/tags/tag/Pre-Packaging.svg" alt="Pre-Packaging">
+<img src="/tags/pre_supported_packaging/MaterialBinLoader.svg" alt=""></p>
+<blockquote>
+<ul>
+<li>The screen remains bright as if night vision is always enabled, eliminating dark areas.</li>
+<li>Makes ores glow.</li>
+</ul>
+</blockquote>
+<p><a href="https://mcpedl.com/night-emissive-vision-for-mcpe-be-v1-21">https://mcpedl.com/night-emissive-vision-for-mcpe-be-v1-21</a></p>
+<br>
+<br>
+<h3>HD Font Fix</h3>
+<p><img src="https://img.shields.io/badge/Creator-GameParrot-3D444D?style=flat-square&labelColor=white" alt="Creator">
+<img src="/tags/tag/link.svg" alt="link">
+<a href="https://github.com/GameParrot/mcpe-hdfont-fix"><img src="/tags/link/GitHub.svg" alt=""></a>
+<img src="/tags/tag/Platform.svg" alt="Platform">
+<img src="/tags/platform/Android.svg" alt="">
+<img src="/tags/platform/Windows.svg" alt="">
+<img src="/tags/tag/Pre-Packaging.svg" alt="Pre-Packaging">
+<img src="/tags/pre_supported_packaging/MaterialBinLoader.svg" alt=""></p>
+<blockquote>
+<p>Corrects texture issues when using high-resolution fonts.</p>
+</blockquote>
+<p><a href="screenshots/HD%20Font%20Fix/README.md"><img src="https://img.shields.io/badge/Screen_Shots-click-white?style=social-square" alt=""></a></p>
+<p><a href="https://github.com/GameParrot/mcpe-hdfont-fix">https://github.com/GameParrot/mcpe-hdfont-fix</a></p>
+<br>
+<br>
+<h3>Glow Em All</h3>
+<p><img src="https://img.shields.io/badge/Creator-Azi_Angelo_Real-3D444D?style=flat-square&labelColor=white" alt="Creator">
+<img src="/tags/tag/link.svg" alt="link">
+<a href="https://www.curseforge.com/minecraft-bedrock/texture-packs/glow-em-all-shader"><img src="/tags/link/CurseForge.svg" alt=""></a>
+<a href="https://mcpedl.com/glow-em-all"><img src="/tags/link/MCPEDL.svg" alt=""></a>
+<a href="https://discord.gg/MZfYkY8tmD"><img src="/tags/link/Discord.svg" alt=""></a>
+<a href="https://youtu.be/91xzwza8F84?si=SsgUojdXQTk0v-hF"><img src="/tags/link/YouTube.svg" alt=""></a>
+<img src="/tags/tag/Platform.svg" alt="Platform">
+<img src="/tags/platform/Android.svg" alt="">
+<img src="/tags/tag/Pre-Packaging.svg" alt="Pre-Packaging">
+<img src="/tags/pre_supported_packaging/MaterialBinLoader.svg" alt=""></p>
+<blockquote>
+<p>Makes ores glow.</p>
+</blockquote>
+<p><a href="screenshots/Ringo/README.md"><img src="https://img.shields.io/badge/Screen_Shots-click-white?style=social-square" alt=""></a><br>
+<a href="https://mcpedl.com/glow-em-all">https://mcpedl.com/glow-em-all</a></p>
+<br>
+<br>
+<br>
+<hr>
+<br>
+<br>
+<h2>Dev</h2>
+<p><a href="https://github.com/DominoKorean/Render-dragon-shader-list/tree/main/dev.md">https://github.com/DominoKorean/Render-dragon-shader-list/tree/main/dev.md</a></p>
+<p>This document contains materials necessary for RenderDragon shader development.</p>
+<br>
+<br>
+<br>
+<hr>
+<br>
+<br>
+<p><strong>THIS IS NOT AN OFFICIAL MINECRAFT PRODUCT. IT IS NOT APPROVED BY OR ASSOCIATED WITH MOJANG OR MICROSOFT.</strong></p>
 
 </body>
 </html>
